@@ -1,4 +1,5 @@
 import s from './FilteredMoviesPage.module.css'
+import {Button} from "@/common/components/Button/Button.tsx";
 export const FilteredMoviesPage = () => {
     return (
         <section>
@@ -27,16 +28,11 @@ export const FilteredMoviesPage = () => {
                         </div>
 
                         <div className={s.cat}>
-                            <button className="cattegory__btn">Action</button>
-                            <button className="cattegory__btn">Action</button>
-                            <button className="cattegory__btn">Action</button>
-                            <button className="cattegory__btn">Action</button>
-                            <button className="cattegory__btn">Action</button>
-                            <button className="cattegory__btn">Action</button>
-                            <button className="cattegory__btn">Action</button>
+                            <Button titleButton={'Action'} />
+
                         </div>
 
-                        <button className="cattegory__btn active">Reset filters</button>
+                        <Button titleButton={'Reset filters'} activeButton={true} />
 
                     </aside>
 

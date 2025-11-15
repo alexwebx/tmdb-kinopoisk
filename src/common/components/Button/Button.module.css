@@ -1,0 +1,16 @@
+.cattegory__btn{
+    width: fit-content;
+    background: transparent;
+    border: 1px solid #d1d5db;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 20px;
+}
+.cattegory__btn:hover{
+    background: #f3f4f6;
+    color: #535bf2;
+}
+.cattegory__btn.active{
+    background: #2563eb;
+    color: #ffffff;
+}

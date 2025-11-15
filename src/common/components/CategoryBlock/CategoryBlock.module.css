@@ -1,0 +1,30 @@
+.cattegory{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cattegory__top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cattegory__title{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.cattegory__menu{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.cattegory__body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    justify-items: start;
+}
