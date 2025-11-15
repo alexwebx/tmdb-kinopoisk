@@ -1,0 +1,28 @@
+.offer{
+    width: 100vw;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.offer__box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.offer__title{
+    font-size: 48px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.offer__text{
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+}
