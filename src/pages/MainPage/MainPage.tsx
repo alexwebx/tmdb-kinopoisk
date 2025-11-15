@@ -27,7 +27,7 @@ export const MainPage = ()=> {
                                     </svg>
                                 </button>
                                 <img src="http://image.tmdb.org/t/p/w185/g4JtvGlQO7DByTI6frUobqvSL3R.jpg" alt="movie"/>
-                                <span className="movie__rating">7.9</span>
+                                <span className="movie__rating movie__rating-card movie__rating-green">7.9</span>
                             </div>
                             <p className="movie__title">Frankenstein</p>
                         </a>

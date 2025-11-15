@@ -4,8 +4,8 @@ export const FilteredMoviesPage = () => {
         <section>
             <div className="container">
 
-                <div className={s.layout}>
-                    <aside className={s.sidebar}>
+                <div className="layout">
+                    <aside className="sidebar filtered__sidebar">
                         <h2 className={s.filter__title}>Filters / Sort</h2>
 
                         <div className={s.sortby}>
@@ -40,7 +40,7 @@ export const FilteredMoviesPage = () => {
 
                     </aside>
 
-                    <main className={s.content}>
+                    <main className="content">
 
                     </main>
                 </div>

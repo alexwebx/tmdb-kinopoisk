@@ -186,18 +186,29 @@ section{
 }
 
 .movie__rating{
-    background: #22c55e;
-    display: flex;
+    display: inline-grid;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     color: #FFFFFF;
+}
+
+.movie__rating-card{
     position: absolute;
     right: 10px;
     bottom: 10px;
 }
+
+.movie__rating-green{
+    background: #22c55e;
+}
+
+.movie__rating-yelow{
+    background: #facc15;
+}
+
 
 .movie__favorite{
     transition: all 0.5s ease;
@@ -232,3 +243,31 @@ section{
     background: #2563eb;
 }
 
+
+
+.layout {
+    display: flex;
+    gap: 24px;
+    padding: 20px;
+}
+
+.filtered__sidebar {
+    padding: 24px;
+    background: #f3f4f6;
+    gap: 30px;
+    border-radius: 12px;
+}
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

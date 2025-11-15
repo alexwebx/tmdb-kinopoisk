@@ -5,6 +5,7 @@ import {CategoryMoviesPage} from "@/pages/CategoryMoviesPage/CategoryMoviesPage.
 import {FavoritesPage} from "@/pages/FavoritesPage/FavoritesPage.tsx";
 import {SearchPage} from "@/pages/SearchPage/SearchPage.tsx";
 import {FilteredMoviesPage} from "@/pages/FilteredMoviesPage/FilteredMoviesPage.tsx";
+import {MovieCard} from "@/entities/movie/ui/MovieCard.tsx";
 
 export const Path = {
     Main: '/',
@@ -12,6 +13,7 @@ export const Path = {
     FilteredMovies: '/filtered-movies',
     Search: '/search',
     Favorites: '/favorites',
+    Movie: '/movie',
     NotFound: '*',
 } as const
 export const Routing = () =>{
@@ -22,6 +24,7 @@ export const Routing = () =>{
             <Route path={Path.FilteredMovies} element={<FilteredMoviesPage/>} />
             <Route path={Path.Search} element={<SearchPage/>} />
             <Route path={Path.Favorites} element={<FavoritesPage/>} />
+            <Route path={Path.Movie} element={<MovieCard/>} />
             <Route path={Path.NotFound} element={<PageNotFound/>} />
         </Routes>
     )

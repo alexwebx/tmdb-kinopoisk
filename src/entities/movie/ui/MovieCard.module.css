@@ -1,0 +1,84 @@
+.poster{
+    border-radius: 12px;
+}
+
+.movie__container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.movie__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movie__title{
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.movie__word{
+    font-size: 16px;
+    color: #4b5563;
+}
+
+.movie__word span{
+    margin: 0 10px;
+}
+
+.movie__text{
+    font-size: 18px;
+    line-height: 1.6;
+    color: #374151;
+}
+
+.genres{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.genres__title{
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.genres__box{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.genres__name{
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #1f2937;
+    background: #e5e7eb;
+    border-radius: 12px;
+}
+
+.actor{
+    width: 160px;
+    height: 160px;
+}
+
+.actor__img{
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.actor__name{
+    font-size: 16px;
+    text-align: center;
+}
+
+.actor__film_name{
+    font-size: 14px;
+    text-align: center;
+    color: #6b7280;
+}
