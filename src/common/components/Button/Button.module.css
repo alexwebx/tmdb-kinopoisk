@@ -8,9 +8,28 @@
 }
 .cattegory__btn:hover{
     background: #f3f4f6;
-    color: #535bf2;
+    border-color: #646cff;
+    box-shadow: 0 0 0 2px rgb(37 99 235 / .1);
 }
 .cattegory__btn.active{
+    background: #2563eb;
+    color: #ffffff;
+}
+
+
+:global(body.dark) .cattegory__btn {
+    border-color: #324061;
+    background: #1f2b40;
+    color: #f8fafc;
+}
+
+:global(body.dark) .cattegory__btn:hover {
+    background: #141c2c;
+    color: #f8fafc;
+}
+
+:global(body.dark) .cattegory__btn.active{
+    border-color: #2563eb;
     background: #2563eb;
     color: #ffffff;
 }

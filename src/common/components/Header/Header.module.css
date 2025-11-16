@@ -34,8 +34,13 @@ body .header__menu ul li a:hover{
     background: #e5e7eb;
 }
 
-body.dark .header__menu ul li a:hover{
+:global(body.dark) .header__menu ul li a {
+    color: #e2e8f0;
+}
+
+:global(body.dark) .header__menu ul li a:hover {
     background: #1f2b40;
+    color: #e2e8f0;
 }
 
 
@@ -43,8 +48,9 @@ body .activeLink {
     background: #e5e7eb;
 }
 
-body.dark .activeLink {
+:global(body.dark) .activeLink {
     background: #1f2b40;
+    color: #e2e8f0;
 }
 
 .header__btn{
@@ -64,7 +70,7 @@ body.dark .activeLink {
     transform: translateY(-1px);
 }
 
-body.dark .header__btn {
+:global(body.dark) .header__btn {
     background: #1f2b40;
     border: 1px solid #324061;
 }

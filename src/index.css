@@ -39,7 +39,7 @@ body.dark {
     color: var(--primary-text-dark-color);
 }
 
-body header{
+header{
     background: var(--secondary-back-color);
     color: var(--secondary-text-color);
     border-bottom: 1px solid #e5e7eb;
@@ -48,7 +48,7 @@ body header{
 body.dark header{
     background: var(--secondary-dark-back-color);
     color: var(--secondary-text-dark-color);
-    border-top: 1px solid #1f2b40;
+    border-bottom: 1px solid #1f2b40;
 }
 
 body footer{
@@ -62,6 +62,7 @@ body.dark footer{
     color: var(--secondary-text-dark-color);
     border-top: 1px solid #1f2b40;
 }
+
 
 /*theme end*/
 
@@ -97,12 +98,6 @@ section{
     flex: 1;
 }
 
-
-
-
-
-
-
 .layout {
     display: flex;
     gap: 24px;
@@ -114,6 +109,12 @@ section{
     background: #f3f4f6;
     gap: 30px;
     border-radius: 12px;
+}
+
+body.dark .filtered__sidebar{
+    background: var(--secondary-dark-back-color);
+    color: #e2e8f0;
+    border-bottom: 1px solid #1f2b40;
 }
 
 .sidebar {

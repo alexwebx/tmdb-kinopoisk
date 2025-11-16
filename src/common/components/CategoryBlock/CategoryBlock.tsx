@@ -21,7 +21,7 @@ export const CategoryBlock = (
                 />
             </div>
             <div className={s.cattegory__body}>
-                {moviesArray.map((movie) => {
+                {moviesArray?.map((movie) => {
                     return (
                         <OneMovieCard
                             titleMovie={movie.titleMovie}

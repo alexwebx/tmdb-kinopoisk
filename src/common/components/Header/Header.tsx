@@ -1,9 +1,14 @@
 import s from './Header.module.css'
 import {Path} from "@/common/routing";
 import {NavLink} from "react-router";
+import {useAppDispatch, useAppSelector} from "@/common/hooks";
+import {changeThemeMode, selectThemeMode} from "@/app/ui/App/model/app-slice.ts";
 
 
 export const Header = () => {
+    const themeMode = useAppSelector(selectThemeMode)
+    const dispatch = useAppDispatch()
+
     const navItems = [
         {to: Path.Main, label: 'Main'},
         {to: Path.CategoryMovies, label: 'Category movies'},
@@ -12,6 +17,9 @@ export const Header = () => {
         {to: Path.Favorites, label: 'Favorites'},
     ]
 
+    const changeMode = () => {
+        dispatch(changeThemeMode({ themeMode: themeMode === "light" ? "dark" : "light" }))
+    }
 
     return (
         <header className={s.header}>
@@ -49,7 +57,11 @@ export const Header = () => {
                         </ul>
                     </nav>
 
-                    <button className={s.header__btn}>🌙</button>
+                    <button onClick={changeMode} className={s.header__btn}>
+                        {themeMode === "light" ? "🌙" : "☀️"}
+                    </button>
+
+
                 </div>
 
             </div>
