@@ -1,38 +1,45 @@
 import {OneMovieCard} from "@/common/components/OneMovieCard/OneMovieCard.tsx";
 import s from "./CategoryBlock.module.css"
-import {Button, type ButtonProps} from "@/common/components/Button/Button.tsx";
+import {Button} from "@/common/components/Button/Button.tsx";
+import type {MovieResult} from "@/features/movie/api/movieApi.types.ts";
 
-type Props = ButtonProps &{
-    titleCategory: string
-    moviesArray: string[]
+type Props = {
+    titleCategory: string | undefined
+    needButton?: boolean
+    buttonHandler?: ()=> void
+    countMovies?: number
+    moviesArray: MovieResult[] | undefined
 }
 
-export const CategoryBlock = (
-    {titleCategory,
-    titleButton,
-    moviesArray}:
-    Props) => {
+export const CategoryBlock = ({
+                                  titleCategory,
+                                  needButton,
+                                  buttonHandler,
+                                  countMovies,
+                                  moviesArray,
+                              }: Props) => {
+
+    const moviesToShow = moviesArray?.slice(
+        0,
+        countMovies && countMovies > 0 ? countMovies : moviesArray.length
+    )
+
     return (
         <div className={s.cattegory}>
             <div className={s.cattegory__top}>
                 <h2 className={s.cattegory__title}>{titleCategory}</h2>
-                <Button
-                    titleButton={titleButton}
-                />
+                {needButton && <Button onclickHandler={buttonHandler} titleButton={'View more'} />}
             </div>
             <div className={s.cattegory__body}>
-                {moviesArray?.map((movie) => {
-                    return (
-                        <OneMovieCard
-                            titleMovie={movie.titleMovie}
-                            imageUrlMovie={movie.imageUrlMovie}
-                            ratingMovie={movie.ratingMovie}
-                            isFavoriteMovie={movie.isFavoriteMovie}
-                            urlMovie={movie.urlMovie}
-                        />
-                    )
-                })}
-
+                {moviesToShow?.map((movie) => (
+                    <OneMovieCard
+                        key={movie.id}
+                        titleMovie={movie.title}
+                        imageUrlMovie={movie.poster_path}
+                        ratingMovie={movie.vote_average}
+                        urlMovie={''}
+                    />
+                ))}
             </div>
         </div>
     )
