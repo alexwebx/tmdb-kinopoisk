@@ -26,8 +26,10 @@ export const MainPage = () => {
     }, [popularMovies]);
 
     const bgImage = randomPoster
-        ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://image.tmdb.org/t/p/w1280${randomPoster})`
+        ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${import.meta.env.VITE_IMG_URL}/${randomPoster})`
         : undefined;
+
+
 
     return (
         <section>
@@ -35,7 +37,11 @@ export const MainPage = () => {
                 <div className="container">
                     <div className={s.offer__box}>
                         <h1 className={s.offer__title}>Welcome</h1>
-                        <Search />
+                        <Search
+                            onSubmit={(query) =>
+                                navigate(`${Path.Search}?query=${encodeURIComponent(query)}`)
+                            }
+                        />
                         <p className={s.offer__text}>Browse highlighted titles from TMDB</p>
                     </div>
                 </div>

@@ -30,6 +30,14 @@ export const movieApi = baseApi.injectEndpoints({
                 params: { page }
             })
         }),
+
+        getDetailsMovie: build.query<MovieListResponse, number | void>({
+            query: (movie_id) => ({
+                url: "/",
+                params: { movie_id }
+            })
+        }),
+
     })
 });
 
@@ -38,5 +46,6 @@ export const {
     useGetPopularMoviesQuery,
     useGetTopRatedMoviesQuery,
     useGetNowPlayingMoviesQuery,
-    useGetUpcomingMoviesQuery
+    useGetUpcomingMoviesQuery,
+    useGetDetailsMovieQuery
 } = movieApi

@@ -1,0 +1,10 @@
+.text{
+    font-size: 16px;
+    color: #6b7280;
+    margin-top: 20px;
+}
+
+:global(body.dark) .text {
+    color: #64748b;
+}
+

@@ -20,7 +20,7 @@ export const Routing = () =>{
         <Routes>
             <Route path={Path.Main} element={<MainPage/>} />
             <Route path={Path.CategoryMovies} element={<CategoryMoviesPage/>} />
-            <Route path={Path.Category} element={<Navigate to="/category/popular" replace />} />
+            <Route path={Path.Category} element={<Navigate to={`${Path.Category}/popular`} replace />} />
             <Route path={Path.FilteredMovies} element={<FilteredMoviesPage/>} />
             <Route path={Path.Search} element={<SearchPage/>} />
             <Route path={Path.Favorites} element={<FavoritesPage/>} />

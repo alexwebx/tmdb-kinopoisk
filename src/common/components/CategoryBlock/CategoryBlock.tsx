@@ -2,13 +2,14 @@ import {OneMovieCard} from "@/common/components/OneMovieCard/OneMovieCard.tsx";
 import s from "./CategoryBlock.module.css"
 import {Button} from "@/common/components/Button/Button.tsx";
 import type {MovieResult} from "@/features/movie/api/movieApi.types.ts";
+import type {FavoriteMovie} from "@/common/types";
 
 type Props = {
     titleCategory: string | undefined
     needButton?: boolean
     buttonHandler?: ()=> void
     countMovies?: number
-    moviesArray: MovieResult[] | undefined
+    moviesArray: MovieResult[] | FavoriteMovie[] | undefined
 }
 
 export const CategoryBlock = ({
@@ -34,10 +35,10 @@ export const CategoryBlock = ({
                 {moviesToShow?.map((movie) => (
                     <OneMovieCard
                         key={movie.id}
-                        titleMovie={movie.title}
-                        imageUrlMovie={movie.poster_path}
-                        ratingMovie={movie.vote_average}
-                        urlMovie={''}
+                        id={movie.id}
+                        title={movie.title}
+                        poster_path={movie.poster_path}
+                        vote_average={movie.vote_average}
                     />
                 ))}
             </div>

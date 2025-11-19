@@ -1,34 +1,49 @@
 import s from './OneMovieCard.module.css';
 import { useState, type MouseEvent } from "react";
+import {getItemLS, setItemLS} from "@/common/utils";
+import type {FavoriteMovie} from "@/common/types";
 
-export type OneMovieCardProps = {
-    titleMovie: string
-    imageUrlMovie: string | null
-    ratingMovie: number
-    isFavoriteMovie?: boolean
-    urlMovie: string
+type Props = {
+    id:number
+    title: string
+    poster_path: string | null
+    vote_average: number
 }
 
-export function OneMovieCard({titleMovie, imageUrlMovie, ratingMovie, isFavoriteMovie, urlMovie}: OneMovieCardProps){
-    const [favorite, setFavorite] = useState(isFavoriteMovie || false)
+export function OneMovieCard({id, title, poster_path, vote_average}: Props){
+
+    const initialFavorite = (getItemLS<FavoriteMovie[]>('movies') ?? []).some(m => m.id === id);
+    const [favorite, setFavorite] = useState(initialFavorite);
 
     const favoriteHandler = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation()
         e.preventDefault()
-        setFavorite(!favorite);
+
+        const allFavoriteMovies: FavoriteMovie[] =
+            getItemLS<FavoriteMovie[]>('movies') ?? [];
+
+        const isFavoriteMovie = allFavoriteMovies.some(m => m.id === id);
+        const movie: FavoriteMovie = { id, title, poster_path, vote_average };
+        const updated = isFavoriteMovie
+            ? allFavoriteMovies.filter(m => m.id !== id)
+            : [...allFavoriteMovies, movie];
+
+        setItemLS('movies', updated);
+        setFavorite(!isFavoriteMovie);
     }
 
-    const rating = Number(ratingMovie.toFixed(1))
+    const rating = Number(vote_average.toFixed(1))
 
-    const colorClass =
-        rating >= 8
-            ? s.movie__rating_green
-            : rating >= 6
-                ? s.movie__rating_yellow
-                : s.movie__rating_red;
+    const colorClass = rating >= 8
+        ? s.ratingGreen
+        : rating >= 6
+            ? s.ratingYellow
+            : s.ratingRed;
+
+    const imgUrlMovie = poster_path ? `${import.meta.env.VITE_IMG_URL}/${poster_path}` : 'https://placehold.co/600x400';
 
     return (
-        <a href={urlMovie} className={s.movie}>
+        <a href={''} className={s.movie}>
             <div className={s.movie__img}>
                 <button
                     type="button"
@@ -40,17 +55,17 @@ export function OneMovieCard({titleMovie, imageUrlMovie, ratingMovie, isFavorite
                     </svg>
                 </button>
 
-                <img src={`https://image.tmdb.org/t/p/w1280${imageUrlMovie}`} alt={titleMovie}/>
+                <img src={imgUrlMovie} alt={title}/>
                 <span
                     className={`
-                    ${s.movie__rating} 
-                    ${s.movie__rating_card} 
-                    ${colorClass}
+                        ${s.movie__rating} 
+                        ${s.movie__rating_card} 
+                        ${colorClass}
                     `}>
                     {rating}
                 </span>
             </div>
-            <p className={s.movie__title}>{titleMovie}</p>
+            <p className={s.movie__title}>{title}</p>
         </a>
     )
 }

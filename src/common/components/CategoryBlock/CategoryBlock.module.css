@@ -24,8 +24,8 @@
 
 
 .cattegory__body {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    display: flex;
     gap: 20px;
-    justify-items: start;
+    justify-content: start;
+    flex-wrap: wrap;
 }

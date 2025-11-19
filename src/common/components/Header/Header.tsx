@@ -3,21 +3,33 @@ import {Path} from "@/common/routing";
 import {Link, NavLink} from "react-router";
 import {useAppDispatch, useAppSelector} from "@/common/hooks";
 import {changeThemeMode, selectThemeMode} from "@/app/ui/App/model/app-slice.ts";
+import {useEffect} from "react";
+import {getItemLS, setItemLS} from "@/common/utils";
 
 
 export const Header = () => {
     const themeMode = useAppSelector(selectThemeMode)
     const dispatch = useAppDispatch()
 
+    useEffect(() => {
+        const theme = getItemLS('theme');
+        if(theme){
+            dispatch(changeThemeMode({ themeMode:theme }))
+        }
+    }, []);
+
+
+
     const navItems = [
         {to: Path.Main, label: 'Main'},
-        {to: Path.Category, label: 'Category movies'},
-        {to: Path.FilteredMovies, label: 'Filtered movies'},
+        {to: Path.Category, label: 'Category Movies'},
+        {to: Path.FilteredMovies, label: 'Filtered Movies'},
         {to: Path.Search, label: 'Search'},
         {to: Path.Favorites, label: 'Favorites'},
     ]
 
     const changeMode = () => {
+        setItemLS('theme', themeMode === "light" ? "dark" : "light")
         dispatch(changeThemeMode({ themeMode: themeMode === "light" ? "dark" : "light" }))
     }
 

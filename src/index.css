@@ -72,6 +72,16 @@ body.dark footer{
     min-height: 100vh;
 }
 
+h2{
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+}
+
+body.dark  h2 {
+    color: #f8fafc;
+}
+
 ul,
 li {
     display: block;
@@ -95,6 +105,10 @@ button{
 
 section{
     flex: 1;
+}
+
+.section{
+    padding: 50px;
 }
 
 .layout {
