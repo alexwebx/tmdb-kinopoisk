@@ -2,7 +2,7 @@ import s from './Header.module.css'
 import {Path} from "@/common/routing";
 import {Link, NavLink} from "react-router";
 import {useAppDispatch, useAppSelector} from "@/common/hooks";
-import {changeThemeMode, selectThemeMode} from "@/app/ui/App/model/app-slice.ts";
+import {changeThemeMode, selectThemeMode, type ThemeMode} from "@/app/ui/App/model/app-slice.ts";
 import {useEffect} from "react";
 import {getItemLS, setItemLS} from "@/common/utils";
 
@@ -12,13 +12,11 @@ export const Header = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const theme = getItemLS('theme');
+        const theme:ThemeMode | null = getItemLS('theme');
         if(theme){
             dispatch(changeThemeMode({ themeMode:theme }))
         }
     }, []);
-
-
 
     const navItems = [
         {to: Path.Main, label: 'Main'},

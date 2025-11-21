@@ -1,6 +1,31 @@
 import s from "./MovieCard.module.css"
+import {useNavigate, useParams} from "react-router";
+import {
+    useGetCreditsMovieQuery,
+    useGetDetailsMovieQuery,
+    useGetSimilarMoviesQuery
+} from "@/features/movie/api/moviesApi.ts";
+import {Button} from "@/common/components/Button/Button.tsx";
+import {Rating} from "@/common/components/Rating/Rating.tsx";
+import {CategoryBlock} from "@/common/components/CategoryBlock/CategoryBlock.tsx";
 
 export const MovieCard = () => {
+    const { id } = useParams();
+    const movieId = Number(id);
+    const {data:movie} = useGetDetailsMovieQuery(movieId);
+    const {data:credits} = useGetCreditsMovieQuery(movieId);
+    const {data:similar} = useGetSimilarMoviesQuery(movieId);
+    const navigate = useNavigate();
+
+    const imgUrlMovie = movie?.poster_path ? `${import.meta.env.VITE_IMG_URL}/${movie?.poster_path}` : 'https://placehold.co/600x400';
+
+    const timeString = (minutes?: number) => {
+        if (!minutes) return "—";
+        const h = Math.floor(minutes / 60);
+        const m = minutes % 60;
+        return `${h}h ${m}m`;
+    };
+
     return (
         <section>
             <div className={`container ${s.movie__container}`}>
@@ -8,48 +33,65 @@ export const MovieCard = () => {
                 <div className="layout">
                     <aside className="sidebar">
                         <img className={s.poster} alt="Playdate poster"
-                             src="http://image.tmdb.org/t/p/w342/fGodXWqJkkkbSebPIlxLSygV8GY.jpg"/>
+                             src={imgUrlMovie}/>
                     </aside>
 
                     <main className="content">
 
                         <div className={s.movie__header}>
-                            <h2 className={s.movie__title}>Playdate</h2>
-                            <button className="cattegory__btn">Back</button>
+                            <h2 className={s.movie__title}>{movie?.title}</h2>
+                            <Button titleButton={'Back'} onclickHandler={() => navigate(-1)} />
                         </div>
 
-                        <p className={s.movie__word}>Release year: 2025<span className="movie__rating movie__rating-green">7.9</span>Runtime: 1h 33m</p>
+                        <p className={s.movie__word}>
+                            Release year: {movie?.release_date?.slice(0, 4) ?? "N/A"}
+                            <Rating rating={Number(movie?.vote_average?.toFixed(1) ?? 0)} />
+                            Runtime: {timeString(movie?.runtime)}
+                        </p>
                         <p className={s.movie__text}>
-                            When out-of-work accountant Brian joins stay-at-home dad Jeff for a playdate with their sons, he expects a laid-back afternoon. Instead, they're chased by mercenaries, and Brian—totally unprepared—must survive one absurd obstacle after another.
+                            {movie?.overview}
                         </p>
 
-                        <div className={s.genres}>
-                            <h3 className={s.genres__title}>Genres</h3>
-                            <div className={s.genres__box} >
-                                <span className={s.genres__name}>Action</span>
-                                <span className={s.genres__name}>Action</span>
-                                <span className={s.genres__name}>Action</span>
+                        {/*Жанры*/}
+                        {movie?.genres && movie.genres.length > 0 && (
+                            <div className={s.genres}>
+                                <h3 className={s.genres__title}>Genres</h3>
+                                <div className={s.genres__box}>
+                                    {movie.genres.map((genre) => (
+                                        <span key={genre.id} className={s.genres__name}>{genre.name}</span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
+                        {/*Жанры*/}
 
                     </main>
                 </div>
 
-                <div className="cattegory">
-                    <div className="cattegory__top">
+                <div className={s.cattegory}>
+                    <div className={s.cattegory__top}>
                         <h2 className="cattegory__title">Cast</h2>
                     </div>
-                    <div className="cattegory__body">
-                        <div className="actor">
-                            <div className="actor__box">
-                                <img className={s.actor__img} alt="Kevin James portrait" loading="lazy"
-                                     src="http://image.tmdb.org/t/p/w185/3WPW5duZyQcjveefxwLULgIyhM0.jpg"/>
-                            </div>
-                            <p className={s.actor__name}>Kevin James</p>
-                            <p className={s.actor__film_name}>Brian</p>
-                        </div>
+                    <div className={s.cattegory__body}>
+                        {credits?.cast?.slice(0, 6).map((credit) =>
+                            {
+                                const imgUrlCast = credit.profile_path ? `${import.meta.env.VITE_IMG_URL}/${credit.profile_path}` : 'https://placehold.co/600x400';
+                                return (
+                                    <div key={credit.id} className={s.actor}>
+                                        <div className={s.actor__box}>
+                                            <img className={s.actor__img} alt={credit.name} loading="lazy"
+                                                 src={imgUrlCast}/>
+                                        </div>
+                                        <p className={s.actor__name}>{credit.name}</p>
+                                        <p className={s.actor__film_name}>{credit.character}</p>
+                                    </div>
+                                )
+                            }
+                        )}
                     </div>
                 </div>
+
+                <CategoryBlock titleCategory={'Similar Movies'} countMovies={6} moviesArray={similar?.results} />
 
             </div>
         </section>

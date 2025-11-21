@@ -28,10 +28,18 @@
     margin: 0 10px;
 }
 
+:global(body.dark) .movie__word{
+    color: #cbd5f5;
+}
+
 .movie__text{
     font-size: 18px;
     line-height: 1.6;
     color: #374151;
+}
+
+:global(body.dark) .movie__text{
+    color: #cbd5f5;
 }
 
 .genres{
@@ -46,6 +54,10 @@
     color: #111827;
 }
 
+:global(body.dark) .genres__title{
+    color: #e2e8f0;
+}
+
 .genres__box{
     display: flex;
     gap: 10px;
@@ -58,6 +70,20 @@
     color: #1f2937;
     background: #e5e7eb;
     border-radius: 12px;
+}
+
+:global(body.dark) .genres__name{
+    background: #1f2b40;
+    color: #e2e8f0;
+}
+
+
+.cattegory{
+    margin-bottom: 40px;
+}
+
+.cattegory__top{
+    margin-bottom: 20px;
 }
 
 .actor{
@@ -81,4 +107,11 @@
     font-size: 14px;
     text-align: center;
     color: #6b7280;
+}
+
+.cattegory__body {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

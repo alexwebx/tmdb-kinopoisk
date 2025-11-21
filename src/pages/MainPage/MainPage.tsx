@@ -22,7 +22,7 @@ export const MainPage = () => {
     const randomPoster = useMemo(() => {
         if (!popularMovies?.results?.length) return null;
         const movie = popularMovies.results[Math.floor(Math.random() * popularMovies.results.length)];
-        return movie.poster_path;
+        return movie.backdrop_path;
     }, [popularMovies]);
 
     const bgImage = randomPoster

@@ -2,6 +2,7 @@ import s from './OneMovieCard.module.css';
 import { useState, type MouseEvent } from "react";
 import {getItemLS, setItemLS} from "@/common/utils";
 import type {FavoriteMovie} from "@/common/types";
+import {Rating} from "@/common/components/Rating/Rating.tsx";
 
 type Props = {
     id:number
@@ -34,16 +35,10 @@ export function OneMovieCard({id, title, poster_path, vote_average}: Props){
 
     const rating = Number(vote_average.toFixed(1))
 
-    const colorClass = rating >= 8
-        ? s.ratingGreen
-        : rating >= 6
-            ? s.ratingYellow
-            : s.ratingRed;
-
     const imgUrlMovie = poster_path ? `${import.meta.env.VITE_IMG_URL}/${poster_path}` : 'https://placehold.co/600x400';
 
     return (
-        <a href={''} className={s.movie}>
+        <a href={`/movie/${id}`} className={s.movie}>
             <div className={s.movie__img}>
                 <button
                     type="button"
@@ -56,14 +51,7 @@ export function OneMovieCard({id, title, poster_path, vote_average}: Props){
                 </button>
 
                 <img src={imgUrlMovie} alt={title}/>
-                <span
-                    className={`
-                        ${s.movie__rating} 
-                        ${s.movie__rating_card} 
-                        ${colorClass}
-                    `}>
-                    {rating}
-                </span>
+                <Rating rating={rating} card={true}/>
             </div>
             <p className={s.movie__title}>{title}</p>
         </a>

@@ -37,34 +37,6 @@
     color: #f8fafc;
 }
 
-.movie__rating{
-    display: inline-grid;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    color: #FFFFFF;
-}
-
-.movie__rating_card{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-}
-
-.movie__rating_green{
-    background: #46d369;
-}
-
-.movie__rating_yellow{
-    background: #ffa500;
-}
-
-.movie__rating_red{
-    background: #e50914;
-}
-
 .movie__favorite{
     transition: all 0.5s ease;
     color: #FFFFFF;

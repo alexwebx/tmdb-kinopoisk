@@ -1,5 +1,5 @@
 import {baseApi} from "@/app/ui/App/api/baseApi.ts";
-import type {MovieListResponse} from "@/features/movie/api/movieApi.types.ts";
+import type {MovieCastResponse, MovieDetails, MovieListResponse} from "@/features/movie/api/movieApi.types.ts";
 
 export const movieApi = baseApi.injectEndpoints({
     endpoints: build => ({
@@ -31,10 +31,24 @@ export const movieApi = baseApi.injectEndpoints({
             })
         }),
 
-        getDetailsMovie: build.query<MovieListResponse, number | void>({
+        getDetailsMovie: build.query<MovieDetails, number>({
             query: (movie_id) => ({
-                url: "/",
-                params: { movie_id }
+                url: `/${movie_id}`,
+                params: {}
+            })
+        }),
+
+        getCreditsMovie: build.query<MovieCastResponse, number>({
+            query: (movie_id) => ({
+                url: `/${movie_id}/credits`,
+                params: {}
+            })
+        }),
+
+        getSimilarMovies: build.query<MovieListResponse, number>({
+            query: (movie_id) => ({
+                url: `/${movie_id}/similar`,
+                params: {}
             })
         }),
 
@@ -47,5 +61,7 @@ export const {
     useGetTopRatedMoviesQuery,
     useGetNowPlayingMoviesQuery,
     useGetUpcomingMoviesQuery,
-    useGetDetailsMovieQuery
+    useGetDetailsMovieQuery,
+    useGetCreditsMovieQuery,
+    useGetSimilarMoviesQuery
 } = movieApi

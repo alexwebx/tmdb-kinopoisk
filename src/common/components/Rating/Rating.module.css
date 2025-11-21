@@ -1,0 +1,27 @@
+.movie__rating{
+    display: inline-grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: #FFFFFF;
+}
+
+.movie__rating_card{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.ratingGreen{
+    background: #46d369;
+}
+
+.ratingYellow{
+    background: #ffa500;
+}
+
+.ratingRed{
+    background: #e50914;
+}
