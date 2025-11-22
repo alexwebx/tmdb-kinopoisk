@@ -63,12 +63,12 @@ export type MovieDetails = {
 };
 
 
-export interface MovieCastResponse {
+export type MovieCastResponse = {
     id: number;
     cast: CastMember[];
 }
 
-export interface CastMember {
+export type CastMember = {
     adult: boolean;
     gender: number | null;
     id: number;
@@ -81,4 +81,21 @@ export interface CastMember {
     character: string;
     credit_id: string;
     order: number;
+}
+
+export type Genre = {
+    id: number;
+    name: string;
+}
+
+export type GenresResponse = {
+    genres: Genre[];
+}
+
+export type FilteredQuery = {
+    page: number;
+    sort_by: string;
+    "vote_average.gte"?: number;
+    "vote_average.lte"?: number;
+    with_genres?: string;
 }

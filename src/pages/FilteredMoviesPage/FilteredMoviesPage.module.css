@@ -21,30 +21,6 @@
     font-size: 14px;
 }
 
-.rating{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.rating__box{
-    display: flex;
-    justify-content: space-between;
-}
-
-.rating__word{
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.rating__count{
-    font-size: 14px;
-}
-
-.rating__input{
-    width: 100%;
-}
-
 .cat{
     display: flex;
     flex-wrap: wrap;
