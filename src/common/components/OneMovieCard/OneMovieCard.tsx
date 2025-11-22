@@ -3,6 +3,7 @@ import { useState, type MouseEvent } from "react";
 import {getItemLS, setItemLS} from "@/common/utils";
 import type {FavoriteMovie} from "@/common/types";
 import {Rating} from "@/common/components/Rating/Rating.tsx";
+import {NO_IMG} from "@/common/constants";
 
 type Props = {
     id:number
@@ -35,7 +36,7 @@ export function OneMovieCard({id, title, poster_path, vote_average}: Props){
 
     const rating = Number(vote_average.toFixed(1))
 
-    const imgUrlMovie = poster_path ? `${import.meta.env.VITE_IMG_URL}/${poster_path}` : 'https://placehold.co/600x400';
+    const imgUrlMovie = poster_path ? `${import.meta.env.VITE_IMG_URL}/${poster_path}` : NO_IMG;
 
     return (
         <a href={`/movie/${id}`} className={s.movie}>

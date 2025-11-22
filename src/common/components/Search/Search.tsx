@@ -1,14 +1,19 @@
 import s from "./Search.module.css";
-import {type ChangeEvent, useState} from "react";
+import {type ChangeEvent, useEffect, useState} from "react";
 
 
 type Props = {
     onSubmit: (query: string) => void;
     onClear?: () => void;
+    val?: string;
 };
 
-export const Search = ({ onSubmit, onClear }:Props) =>{
+export const Search = ({ onSubmit, val , onClear }:Props) =>{
     const [value, setValue] = useState("");
+
+    useEffect(() => {
+        setValue(val ?? "");
+    }, [val]);
 
     const handleClick = () => {
         if (!value.trim()) return;
@@ -16,9 +21,10 @@ export const Search = ({ onSubmit, onClear }:Props) =>{
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setValue(value);
-        if (value === "") {
+        const v = e.target.value;
+        setValue(v);
+
+        if (v === "") {
             onClear?.();
         }
     };
@@ -31,6 +37,12 @@ export const Search = ({ onSubmit, onClear }:Props) =>{
                 placeholder="Search for a movie"
                 value={value}
                 onChange={handleChange}
+                onInput={(e) => {
+                    const v = (e.target as HTMLInputElement).value;
+                    if (v === "") {
+                        onClear?.();
+                    }
+                }}
             />
             <button
                 className={s.search__btn}

@@ -1,0 +1,1 @@
+export const NO_IMG = 'https://placehold.co/600x400';

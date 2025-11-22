@@ -5,50 +5,57 @@ export const movieApi = baseApi.injectEndpoints({
     endpoints: build => ({
         getPopularMovies: build.query<MovieListResponse, number | void>({
             query: (page = 1) => ({
-                url: "/popular",
+                url: "/movie/popular",
                 params: { page }
             })
         }),
 
         getTopRatedMovies: build.query<MovieListResponse, number | void>({
             query: (page = 1) => ({
-                url: "/top_rated",
+                url: "/movie/top_rated",
                 params: { page }
             })
         }),
 
         getUpcomingMovies: build.query<MovieListResponse, number | void>({
             query: (page = 1) => ({
-                url: "/upcoming",
+                url: "/movie/upcoming",
                 params: { page }
             })
         }),
 
         getNowPlayingMovies: build.query<MovieListResponse, number | void>({
             query: (page = 1) => ({
-                url: "/now_playing",
+                url: "/movie/now_playing",
                 params: { page }
             })
         }),
 
         getDetailsMovie: build.query<MovieDetails, number>({
             query: (movie_id) => ({
-                url: `/${movie_id}`,
+                url: `/movie/${movie_id}`,
                 params: {}
             })
         }),
 
         getCreditsMovie: build.query<MovieCastResponse, number>({
             query: (movie_id) => ({
-                url: `/${movie_id}/credits`,
+                url: `/movie/${movie_id}/credits`,
                 params: {}
             })
         }),
 
         getSimilarMovies: build.query<MovieListResponse, number>({
             query: (movie_id) => ({
-                url: `/${movie_id}/similar`,
+                url: `/movie/${movie_id}/similar`,
                 params: {}
+            })
+        }),
+
+        searchMovies: build.query<MovieListResponse, { page?: number; query: string }>({
+            query: ({page = 1, query}) => ({
+                url: "/search/movie",
+                params: { page, query }
             })
         }),
 
@@ -63,5 +70,6 @@ export const {
     useGetUpcomingMoviesQuery,
     useGetDetailsMovieQuery,
     useGetCreditsMovieQuery,
-    useGetSimilarMoviesQuery
+    useGetSimilarMoviesQuery,
+    useSearchMoviesQuery,
 } = movieApi

@@ -143,3 +143,9 @@ body.dark .filtered__sidebar{
     flex-direction: column;
     gap: 20px;
 }
+
+.pagBlock{
+    display: flex;
+    flex-wrap: wrap;
+    gap: inherit;
+}

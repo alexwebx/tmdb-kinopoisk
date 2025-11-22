@@ -25,19 +25,19 @@ export const CategoryMoviesPage = () => {
     switch (type) {
         case "popular":
             queryHook = popularMovies;
-            title = 'Popular Movies';
+            title = 'Popular';
             break;
         case "top-rated":
             queryHook = topRatedMovies;
-            title = 'Top Rated Movies';
+            title = 'Top Rated';
             break;
         case "upcoming":
             queryHook = nowPlayingMovies;
-            title = 'Upcoming Movies';
+            title = 'Upcoming';
             break;
         case "now-playing":
             queryHook = upcomingMovies;
-            title = 'Now Playing Movies';
+            title = 'Now Playing';
             break;
         default:
             queryHook = null;
@@ -48,10 +48,10 @@ export const CategoryMoviesPage = () => {
             <div className="container">
                 <div className="cattegory">
                     <div className={s.cattegory__menu}>
-                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'popular'))}} activeButton={type==='popular'} titleButton={'Popular Movies'} />
-                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'top-rated'))}} activeButton={type==='top-rated'} titleButton={'Top Rated Movies'} />
-                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'upcoming'))}} activeButton={type==='upcoming'} titleButton={'Upcoming Movies'} />
-                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'now-playing'))}} activeButton={type==='now-playing'} titleButton={'Now Playing Movies'} />
+                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'popular'))}} activeButton={type==='popular'} titleButton={'Popular'} />
+                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'top-rated'))}} activeButton={type==='top-rated'} titleButton={'Top Rated'} />
+                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'upcoming'))}} activeButton={type==='upcoming'} titleButton={'Upcoming'} />
+                        <Button onclickHandler={()=>{navigate(Path.CategoryMovies.replace(':type', 'now-playing'))}} activeButton={type==='now-playing'} titleButton={'Now Playing'} />
                     </div>
                     <CategoryBlock titleCategory={title} moviesArray={queryHook?.results} />
                 </div>

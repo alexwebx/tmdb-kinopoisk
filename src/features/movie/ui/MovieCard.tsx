@@ -8,6 +8,7 @@ import {
 import {Button} from "@/common/components/Button/Button.tsx";
 import {Rating} from "@/common/components/Rating/Rating.tsx";
 import {CategoryBlock} from "@/common/components/CategoryBlock/CategoryBlock.tsx";
+import {NO_IMG} from "@/common/constants";
 
 export const MovieCard = () => {
     const { id } = useParams();
@@ -17,7 +18,7 @@ export const MovieCard = () => {
     const {data:similar} = useGetSimilarMoviesQuery(movieId);
     const navigate = useNavigate();
 
-    const imgUrlMovie = movie?.poster_path ? `${import.meta.env.VITE_IMG_URL}/${movie?.poster_path}` : 'https://placehold.co/600x400';
+    const imgUrlMovie = movie?.poster_path ? `${import.meta.env.VITE_IMG_URL}/${movie?.poster_path}` : NO_IMG;
 
     const timeString = (minutes?: number) => {
         if (!minutes) return "—";
@@ -75,7 +76,7 @@ export const MovieCard = () => {
                     <div className={s.cattegory__body}>
                         {credits?.cast?.slice(0, 6).map((credit) =>
                             {
-                                const imgUrlCast = credit.profile_path ? `${import.meta.env.VITE_IMG_URL}/${credit.profile_path}` : 'https://placehold.co/600x400';
+                                const imgUrlCast = credit.profile_path ? `${import.meta.env.VITE_IMG_URL}/${credit.profile_path}` : NO_IMG;
                                 return (
                                     <div key={credit.id} className={s.actor}>
                                         <div className={s.actor__box}>

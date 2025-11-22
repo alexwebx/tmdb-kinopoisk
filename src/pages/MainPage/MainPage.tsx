@@ -9,9 +9,11 @@ import {
 import {CategoryBlock} from "@/common/components/CategoryBlock/CategoryBlock.tsx";
 import {useNavigate} from "react-router";
 import {Path} from "@/common/routing";
+import {NO_IMG} from "@/common/constants";
 
 export const MainPage = () => {
     const { data:popularMovies } = useGetPopularMoviesQuery();
+    console.log(popularMovies);
     const { data:topRatedMovies } = useGetTopRatedMoviesQuery();
     const { data:nowPlayingMovies } = useGetNowPlayingMoviesQuery();
     const { data:upcomingMovies } = useGetUpcomingMoviesQuery();
@@ -27,10 +29,9 @@ export const MainPage = () => {
 
     const bgImage = randomPoster
         ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${import.meta.env.VITE_IMG_URL}/${randomPoster})`
-        : undefined;
+        : NO_IMG;
 
-
-
+    
     return (
         <section>
             <div className={s.offer} style={{ backgroundImage: bgImage }}>
