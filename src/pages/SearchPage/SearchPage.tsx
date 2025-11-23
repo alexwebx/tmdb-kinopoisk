@@ -42,7 +42,7 @@ export const SearchPage = () => {
                         }}
                     />
 
-                    {normalizedQuery && (
+                    {normalizedQuery && results.length !== 0 &&(
                         <p className={s.search__result}>
                             Results for "{normalizedQuery}"
                         </p>
@@ -54,11 +54,13 @@ export const SearchPage = () => {
                         </p>
                     )}
 
+                    {isFetching && normalizedQuery && <p>Loading…</p>}
+
                     <div className="pagBlock">
-                        {isFetching && normalizedQuery && <p>Loading…</p>}
+
 
                         {!isFetching && normalizedQuery !=='' && results.length === 0 && (
-                            <p>No movies found.</p>
+                            <p>No matches found for "{normalizedQuery}"</p>
                         )}
 
                         {results.length > 0 && normalizedQuery !=='' &&
