@@ -9,29 +9,29 @@ import type {
 
 export const movieApi = baseApi.injectEndpoints({
     endpoints: build => ({
-        getPopularMovies: build.query<MovieListResponse, number | void>({
-            query: (page = 1) => ({
+        getPopularMovies: build.query<MovieListResponse, { page: number }>({
+            query: ({page = 1}) => ({
                 url: "/movie/popular",
                 params: { page }
             })
         }),
 
-        getTopRatedMovies: build.query<MovieListResponse, number | void>({
-            query: (page = 1) => ({
+        getTopRatedMovies: build.query<MovieListResponse, { page: number }>({
+            query: ({page = 1}) => ({
                 url: "/movie/top_rated",
                 params: { page }
             })
         }),
 
-        getUpcomingMovies: build.query<MovieListResponse, number | void>({
-            query: (page = 1) => ({
+        getUpcomingMovies: build.query<MovieListResponse, { page: number }>({
+            query: ({page = 1}) => ({
                 url: "/movie/upcoming",
                 params: { page }
             })
         }),
 
-        getNowPlayingMovies: build.query<MovieListResponse, number | void>({
-            query: (page = 1) => ({
+        getNowPlayingMovies: build.query<MovieListResponse, { page: number }>({
+            query: ({page = 1}) => ({
                 url: "/movie/now_playing",
                 params: { page }
             })

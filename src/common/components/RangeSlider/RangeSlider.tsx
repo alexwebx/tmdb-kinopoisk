@@ -1,15 +1,22 @@
 import './RangeSlider.css';
-import {type ChangeEvent, useCallback, useState} from "react";
+import {type ChangeEvent, useCallback, useEffect, useState} from "react";
 
 // Типы для пропсов компонента
 interface RangeSliderProps {
+    min?: number;
+    max?: number;
     onChange?: (values: { min: number; max: number }) => void;
     onFinalChange?: (values: { min: number; max: number }) => void;
 }
 
-const RangeSlider = ({ onChange, onFinalChange}: RangeSliderProps) => {
-    const [minValue, setMinValue] = useState<number>(0);
-    const [maxValue, setMaxValue] = useState<number>(10);
+const RangeSlider = ({ min = 0, max = 10, onChange, onFinalChange}: RangeSliderProps) => {
+    const [minValue, setMinValue] = useState(min);
+    const [maxValue, setMaxValue] = useState(max);
+
+    useEffect(() => {
+        setMinValue(min);
+        setMaxValue(max);
+    }, [min, max]);
 
     const handleMinChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const value = Math.min(parseFloat(e.target.value), maxValue - 0.1);

@@ -5,8 +5,8 @@ import {setupListeners} from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
     reducer: {
-        [appSlice.name]: appReducer,
         [baseApi.reducerPath]: baseApi.reducer,
+        [appSlice.name]: appReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
 })

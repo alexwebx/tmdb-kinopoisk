@@ -1,7 +1,7 @@
 import {Navigate, Route, Routes} from "react-router";
 import {PageNotFound} from "@/common/components";
 import {MainPage} from "@/pages/MainPage/MainPage.tsx";
-import {CategoryMoviesPage} from "@/pages/CategoryMoviesPage/CategoryMoviesPage.tsx";
+import {MoviesCategoryPage} from "@/pages/MoviesCategoryPage/MoviesCategoryPage.tsx";
 import {FavoritesPage} from "@/pages/FavoritesPage/FavoritesPage.tsx";
 import {SearchPage} from "@/pages/SearchPage/SearchPage.tsx";
 import {FilteredMoviesPage} from "@/pages/FilteredMoviesPage/FilteredMoviesPage.tsx";
@@ -21,7 +21,7 @@ export const Routing = () =>{
     return (
         <Routes>
             <Route path={Path.Main} element={<MainPage/>} />
-            <Route path={Path.CategoryMovies} element={<CategoryMoviesPage/>} />
+            <Route path={Path.CategoryMovies} element={<MoviesCategoryPage/>} />
             <Route path={Path.Category} element={<Navigate to={`${Path.Category}/popular`} replace />} />
             <Route path={Path.FilteredMovies} element={<FilteredMoviesPage/>} />
             <Route path={Path.Search} element={<SearchPage/>} />

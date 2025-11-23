@@ -55,7 +55,7 @@ export const FilteredMoviesPage = () => {
     const resetButtonOnClickHandler = () => {
         setFilters({
             page: currentPage,
-            sort_by: "popularity.asc",
+            sort_by: "popularity.desc",
             "vote_average.gte": 0.0,
             "vote_average.lte": 10.0,
             with_genres: ""
@@ -87,7 +87,11 @@ export const FilteredMoviesPage = () => {
                             </select>
                         </div>
 
-                        <RangeSlider onChange={setSliderValues} />
+                        <RangeSlider
+                            min={sliderValues.min}
+                            max={sliderValues.max}
+                            onChange={setSliderValues}
+                        />
 
 
                         <div className={s.cat}>

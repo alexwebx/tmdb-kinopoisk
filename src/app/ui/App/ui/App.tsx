@@ -1,11 +1,13 @@
 import {Footer, Header} from "@/common/components";
 import {Routing} from "@/common/routing";
-import {useAppSelector} from "@/common/hooks";
+import {useAppSelector, useGlobalLoading} from "@/common/hooks";
 import {selectThemeMode} from "@/app/ui/App/model/app-slice.ts";
 import {useEffect} from "react";
+import {LinearProgress} from "@/common/components/LinearProgress/LinearProgress.tsx";
 
 export function App() {
     const themeMode = useAppSelector(selectThemeMode)
+    const isGlobalLoading = useGlobalLoading()
 
     useEffect(() => {
         document.body.classList.toggle("dark", themeMode === "dark");
@@ -14,6 +16,7 @@ export function App() {
   return (
     <>
         <Header/>
+        {isGlobalLoading && <LinearProgress />}
         <Routing/>
         <Footer/>
     </>
