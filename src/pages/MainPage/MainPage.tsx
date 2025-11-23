@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useState} from 'react';
 import s from './MainPage.module.css'
 import { Search } from "@/common/components/Search/Search.tsx";
 import {
@@ -20,7 +20,7 @@ export const MainPage = () => {
 
     const navigate = useNavigate();
 
-    const [randomPoster, setRandomPoster] = useState(null);
+    const [randomPoster, setRandomPoster] = useState<string | null>(null);
 
     useEffect(() => {
         if (!popularMovies?.results?.length) return;
