@@ -11,16 +11,25 @@ import {Path} from "@/common/routing";
 import s from "./MoviesCategoryPage.module.css"
 import {Pagination} from "@/common/components/Pagination/Pagination.tsx";
 import {useState} from "react";
+import {MoviesSkeleton} from "@/common/components/MovieSkeleton/MovieSkeleton.tsx";
 
 export const MoviesCategoryPage = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const { type } = useParams();
     const navigate = useNavigate();
 
-    const { data:popularMovies } = useGetPopularMoviesQuery({page:currentPage});
-    const { data:topRatedMovies } = useGetTopRatedMoviesQuery({page:currentPage});
-    const { data:nowPlayingMovies } = useGetNowPlayingMoviesQuery({page:currentPage});
-    const { data:upcomingMovies } = useGetUpcomingMoviesQuery({page:currentPage});
+    const { data:popularMovies, isLoading:isLoadingPopularMovies } = useGetPopularMoviesQuery({page:currentPage});
+    const { data:topRatedMovies, isLoading:isLoadingTopRatedMovies } = useGetTopRatedMoviesQuery({page:currentPage});
+    const { data:nowPlayingMovies, isLoading:isLoadingNowPlayingMovies, } = useGetNowPlayingMoviesQuery({page:currentPage});
+    const { data:upcomingMovies, isLoading:isLoadingUpcomingMovies } = useGetUpcomingMoviesQuery({page:currentPage});
+
+    const isLoading =
+        isLoadingPopularMovies ||
+        isLoadingTopRatedMovies ||
+        isLoadingNowPlayingMovies ||
+        isLoadingUpcomingMovies;
+
+    if (isLoading) return <MoviesSkeleton/>
 
     let queryHook;
     let title;

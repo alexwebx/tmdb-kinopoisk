@@ -10,15 +10,15 @@ import {CategoryBlock} from "@/common/components/CategoryBlock/CategoryBlock.tsx
 import {useNavigate} from "react-router";
 import {Path} from "@/common/routing";
 import {NO_IMG} from "@/common/constants";
+import {MoviesSkeleton} from "@/common/components/MovieSkeleton/MovieSkeleton.tsx";
 
 export const MainPage = () => {
-    const { data:popularMovies } = useGetPopularMoviesQuery({page:1});
-    const { data:topRatedMovies } = useGetTopRatedMoviesQuery({page:1});
-    const { data:nowPlayingMovies } = useGetNowPlayingMoviesQuery({page:1});
-    const { data:upcomingMovies } = useGetUpcomingMoviesQuery({page:1});
+    const { data:popularMovies, isLoading:isLoadingPopularMovies } = useGetPopularMoviesQuery({page:1});
+    const { data:topRatedMovies, isLoading:isLoadingTopRatedMovies } = useGetTopRatedMoviesQuery({page:1});
+    const { data:nowPlayingMovies, isLoading:isLoadingNowPlayingMovies, } = useGetNowPlayingMoviesQuery({page:1});
+    const { data:upcomingMovies, isLoading:isLoadingUpcomingMovies } = useGetUpcomingMoviesQuery({page:1});
 
     const navigate = useNavigate();
-
 
     const randomPoster = useMemo(() => {
         if (!popularMovies?.results?.length) return null;
@@ -29,6 +29,14 @@ export const MainPage = () => {
     const bgImage = randomPoster
         ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${import.meta.env.VITE_IMG_URL}/${randomPoster})`
         : NO_IMG;
+
+    const isLoading =
+        isLoadingPopularMovies ||
+        isLoadingTopRatedMovies ||
+        isLoadingNowPlayingMovies ||
+        isLoadingUpcomingMovies;
+
+    if (isLoading) return <MoviesSkeleton/>
 
     
     return (

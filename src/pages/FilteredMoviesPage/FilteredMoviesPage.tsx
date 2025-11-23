@@ -6,6 +6,7 @@ import {useState, useEffect} from "react";
 import {OneMovieCard} from "@/common/components/OneMovieCard/OneMovieCard.tsx";
 import {Pagination} from "@/common/components/Pagination/Pagination.tsx";
 import {useDebounceValue} from "@/common/hooks";
+import {MoviesSkeleton} from "@/common/components/MovieSkeleton/MovieSkeleton.tsx";
 
 
 export const FilteredMoviesPage = () => {
@@ -63,8 +64,8 @@ export const FilteredMoviesPage = () => {
         setSliderValues({ min: 0, max: 10 });
     };
 
-    const { data: filtersMovies } = useGetFiltersMoviesQuery(filters);
-    console.log(filtersMovies)
+    const { data: filtersMovies, isLoading } = useGetFiltersMoviesQuery(filters);
+    if (isLoading) return <MoviesSkeleton/>
 
     return (
         <section>

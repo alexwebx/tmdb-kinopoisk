@@ -5,6 +5,7 @@ import {useSearchMoviesQuery} from "@/features/movie/api/moviesApi.ts";
 import {OneMovieCard} from "@/common/components/OneMovieCard/OneMovieCard.tsx";
 import {useEffect, useState} from "react";
 import {Pagination} from "@/common/components/Pagination/Pagination.tsx";
+import {MoviesSkeleton} from "@/common/components/MovieSkeleton/MovieSkeleton.tsx";
 
 export const SearchPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +13,7 @@ export const SearchPage = () => {
     const query = searchParams.get('query');
     const normalizedQuery = query?.trim() || "";
 
-    const { data, isFetching } = useSearchMoviesQuery(
+    const { data, isFetching, isLoading } = useSearchMoviesQuery(
         { query: query ?? '', page: currentPage },
         { skip: normalizedQuery === "" }
     );
@@ -22,6 +23,8 @@ export const SearchPage = () => {
     }, [normalizedQuery]);
 
     const results = data?.results || [];
+
+    if (isLoading) return <MoviesSkeleton/>
 
     return (
         <section>
