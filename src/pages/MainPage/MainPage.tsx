@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import s from './MainPage.module.css'
 import { Search } from "@/common/components/Search/Search.tsx";
 import {
@@ -20,10 +20,14 @@ export const MainPage = () => {
 
     const navigate = useNavigate();
 
-    const randomPoster = useMemo(() => {
-        if (!popularMovies?.results?.length) return null;
-        const movie = popularMovies.results[Math.floor(Math.random() * popularMovies.results.length)];
-        return movie.backdrop_path;
+    const [randomPoster, setRandomPoster] = useState(null);
+
+    useEffect(() => {
+        if (!popularMovies?.results?.length) return;
+
+        const list = popularMovies.results;
+        const movie = list[Math.floor(Math.random() * list.length)];
+        setRandomPoster(movie.backdrop_path);
     }, [popularMovies]);
 
     const bgImage = randomPoster
