@@ -6,6 +6,13 @@ import type {
     MovieDetails,
     MovieListResponse
 } from "@/features/movie/api/movieApi.types.ts";
+import {validateResponse} from "@/common/utils";
+import {
+    GenresResponseSchema,
+    MovieCastResponseSchema,
+    MovieDetailsSchema,
+    MovieListResponseSchema
+} from "@/common/schemas/schemas.ts";
 
 export const movieApi = baseApi.injectEndpoints({
     endpoints: build => ({
@@ -13,42 +20,54 @@ export const movieApi = baseApi.injectEndpoints({
             query: ({page = 1}) => ({
                 url: "/movie/popular",
                 params: { page }
-            })
+            }),
+            transformResponse: (response: unknown) =>
+                validateResponse(response, MovieListResponseSchema)
         }),
 
         getTopRatedMovies: build.query<MovieListResponse, { page: number }>({
             query: ({page = 1}) => ({
                 url: "/movie/top_rated",
                 params: { page }
-            })
+            }),
+            transformResponse: (response: unknown) =>
+                validateResponse(response, MovieListResponseSchema)
         }),
 
         getUpcomingMovies: build.query<MovieListResponse, { page: number }>({
             query: ({page = 1}) => ({
                 url: "/movie/upcoming",
                 params: { page }
-            })
+            }),
+            transformResponse: (response: unknown) =>
+                validateResponse(response, MovieListResponseSchema)
         }),
 
         getNowPlayingMovies: build.query<MovieListResponse, { page: number }>({
             query: ({page = 1}) => ({
                 url: "/movie/now_playing",
                 params: { page }
-            })
+            }),
+            transformResponse: (response: unknown) =>
+                validateResponse(response, MovieListResponseSchema)
         }),
 
         getDetailsMovie: build.query<MovieDetails, number>({
             query: (movie_id) => ({
                 url: `/movie/${movie_id}`,
                 params: {}
-            })
+            }),
+            transformResponse: (response: unknown) =>
+                validateResponse(response, MovieDetailsSchema)
         }),
 
         getCreditsMovie: build.query<MovieCastResponse, number>({
             query: (movie_id) => ({
                 url: `/movie/${movie_id}/credits`,
                 params: {}
-            })
+            }),
+            transformResponse: (response) =>
+                validateResponse(response, MovieCastResponseSchema)
         }),
 
         getSimilarMovies: build.query<MovieListResponse, number>({
@@ -62,14 +81,19 @@ export const movieApi = baseApi.injectEndpoints({
             query: ({page = 1, query}) => ({
                 url: "/search/movie",
                 params: { page, query }
-            })
+            }),
+            transformResponse: (response: unknown) =>
+                validateResponse(response, MovieListResponseSchema)
         }),
 
         getGenresMovies: build.query<GenresResponse, void>({
             query: () => ({
                 url: "/genre/movie/list",
                 params: {}
-            })
+            }),
+            transformResponse: (response) =>
+                validateResponse(response, GenresResponseSchema)
+
         }),
 
         getFiltersMovies: build.query<MovieListResponse, FilteredQuery>({
@@ -99,11 +123,10 @@ export const movieApi = baseApi.injectEndpoints({
                     url: "/discover/movie",
                     params
                 };
-            }
+            },
+            transformResponse: (response: unknown) =>
+                validateResponse(response, MovieListResponseSchema)
         }),
-
-
-
     })
 });
 
