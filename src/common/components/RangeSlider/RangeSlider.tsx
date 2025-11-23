@@ -4,9 +4,10 @@ import {type ChangeEvent, useCallback, useState} from "react";
 // Типы для пропсов компонента
 interface RangeSliderProps {
     onChange?: (values: { min: number; max: number }) => void;
+    onFinalChange?: (values: { min: number; max: number }) => void;
 }
 
-const RangeSlider = ({ onChange }: RangeSliderProps) => {
+const RangeSlider = ({ onChange, onFinalChange}: RangeSliderProps) => {
     const [minValue, setMinValue] = useState<number>(0);
     const [maxValue, setMaxValue] = useState<number>(10);
 
@@ -50,8 +51,11 @@ const RangeSlider = ({ onChange }: RangeSliderProps) => {
                     step="0.1"
                     value={minValue}
                     onChange={handleMinChange}
+                    onMouseUp={() => onFinalChange?.({ min: minValue, max: maxValue })}
+                    onTouchEnd={() => onFinalChange?.({ min: minValue, max: maxValue })}
                     className="slider-thumb slider-thumb-min"
                 />
+
                 <input
                     type="range"
                     min="0"
@@ -59,8 +63,11 @@ const RangeSlider = ({ onChange }: RangeSliderProps) => {
                     step="0.1"
                     value={maxValue}
                     onChange={handleMaxChange}
+                    onMouseUp={() => onFinalChange?.({ min: minValue, max: maxValue })}
+                    onTouchEnd={() => onFinalChange?.({ min: minValue, max: maxValue })}
                     className="slider-thumb slider-thumb-max"
                 />
+
             </div>
         </div>
     );

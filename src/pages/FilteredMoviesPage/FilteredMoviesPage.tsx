@@ -2,10 +2,11 @@ import s from './FilteredMoviesPage.module.css'
 import { Button } from "@/common/components/Button/Button.tsx";
 import { useGetFiltersMoviesQuery, useGetGenresMoviesQuery } from "@/features/movie/api/moviesApi.ts";
 import RangeSlider from "@/common/components/RangeSlider/RangeSlider.tsx";
-import {useState, useCallback, useEffect} from "react";
+import {useState, useEffect} from "react";
 import {OneMovieCard} from "@/common/components/OneMovieCard/OneMovieCard.tsx";
 import {Pagination} from "@/common/components/Pagination/Pagination.tsx";
 import {useDebounceValue} from "@/common/hooks";
+
 
 export const FilteredMoviesPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -23,10 +24,8 @@ export const FilteredMoviesPage = () => {
 
     const [sliderValues, setSliderValues] = useState({ min: 0, max: 10 });
 
-
-    const debouncedMin = useDebounceValue(sliderValues.min, 700);
-    const debouncedMax = useDebounceValue(sliderValues.max, 700);
-
+    const debouncedMin = useDebounceValue(sliderValues.min, 600);
+    const debouncedMax = useDebounceValue(sliderValues.max, 600);
 
     useEffect(() => {
         setFilters(prev => ({
@@ -35,10 +34,6 @@ export const FilteredMoviesPage = () => {
             "vote_average.lte": debouncedMax
         }));
     }, [debouncedMin, debouncedMax]);
-
-    const rangeSliderOnChangeHandler = useCallback((values: { min: number; max: number }) => {
-        setSliderValues(values); // обновляем локально сразу
-    }, []);
 
     const selectOnChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setFilters(prev => ({ ...prev, sort_by: e.target.value }));
@@ -92,9 +87,8 @@ export const FilteredMoviesPage = () => {
                             </select>
                         </div>
 
-                        <RangeSlider
-                            onChange={rangeSliderOnChangeHandler}
-                        />
+                        <RangeSlider onChange={setSliderValues} />
+
 
                         <div className={s.cat}>
                             {genres?.genres.map(genre => (
