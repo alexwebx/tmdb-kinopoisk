@@ -103,8 +103,12 @@ button{
     margin: 0 auto;
 }
 
-section{
+.routs{
     flex: 1;
+}
+
+section{
+
 }
 
 .section{

@@ -4,6 +4,7 @@ import {useAppSelector, useGlobalLoading} from "@/common/hooks";
 import {selectThemeMode} from "@/app/ui/App/model/app-slice.ts";
 import {useEffect} from "react";
 import {LinearProgress} from "@/common/components/LinearProgress/LinearProgress.tsx";
+import {ToastContainer} from "react-toastify";
 
 export function App() {
     const themeMode = useAppSelector(selectThemeMode)
@@ -17,8 +18,11 @@ export function App() {
     <>
         <Header/>
         {isGlobalLoading && <LinearProgress />}
-        <Routing/>
+        <div className="routs">
+            <Routing/>
+        </div>
         <Footer/>
+        <ToastContainer />
     </>
   )
 }
